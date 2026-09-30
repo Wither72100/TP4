@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres
+    image: postgres:16
     volumes:
       - postgres_data:/var/lib/postgressql/data
       - ./db-init:/docker-entrypoint-initdb.d
@@ -11,8 +11,14 @@ services:
     ports:
       - "5432:5432"
 
-  volumes:
-    postgres_data:
-
   api:
     build: .
+    environment:
+      - DB_HOST: db
+      - DB_PORT: 5432
+      - DB_USER: ekod
+      - DB_PASSWORD: ekod
+      - DB_NAME: tasks
+
+    volumes:
+      postgres_date:
