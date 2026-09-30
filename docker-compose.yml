@@ -1,0 +1,6 @@
+services:
+  db:
+    image: postgres
+
+  api:
+    build: .
