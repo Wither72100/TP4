@@ -1,6 +1,18 @@
 services:
   db:
     image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgressql/data
+      - ./db-init:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: ekod
+      POSTGRES_PASSWORD: ekod
+      POSTGRES_DB: tasks
+    ports:
+      - "5432:5432"
+
+  volumes:
+    postgres_data:
 
   api:
     build: .
